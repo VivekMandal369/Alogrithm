@@ -63,15 +63,47 @@ class Node {
   }
 
   // Add elemet after some specific element
-  public function insertAfter($newElement, $identifier) {
-    $temp = $this->head;
-    while($temp->data != $identifier) {
-      $temp = $temp->next;
+  public function pushAfter($newElement, $identifier) {
+    if($this->head !== null) {
+      $temp = $this->head;
+      while($temp->data !== $identifier) {
+        $temp = $temp->next;
+      }
+      $newNode = new Node();
+      $newNode->data = $newElement;
+      $newNode->next = $temp->next;
+      $temp->next = $newNode;
     }
-    $newNode = new Node();
-    $newNode->data = $newElement;
-    $newNode->next = $temp->next;
-    $temp->next = $newNode;
+  }
+
+  public function popAfter($identifier) {
+    if($this->head !== null) {
+      $temp = $this->head;
+      while($temp->data !== $identifier && $temp->next !== null) {
+        $temp = $temp->next;
+      }
+      if($temp->next !== null) {
+        $temp->next = $temp->next->next;
+      }
+    }
+  }
+
+  public function deleteAllNodes() {
+    $this->head = null;
+  }
+
+  public function countList() {
+    $count = 0;
+    if($this->head !== null) {
+      $temp = $this->head;
+      while($temp !== null) {
+        $temp = $temp->next;
+        $count++;
+      }
+      echo $count;
+    } else {
+      echo $count;
+    }
   }
 
   //display the content of the list
@@ -102,8 +134,8 @@ class Node {
   $MyList->push('vivek');
   // $MyList->unShift('test');
   $MyList->unShift('first');
-  // $MyList->shift();
-  // $MyList->shift();
-  // $MyList->pop();
-  $MyList->insertAfter('me', 30);
+  $MyList->shift();
+  // $MyList->countList();
+  $MyList->deleteAllNodes();
+  $MyList->psuhAfter('me', 30);
   $MyList->PrintList();
