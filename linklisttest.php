@@ -73,6 +73,21 @@ class LinkedList {
     }
   }
 
+  public function listReverse() {
+    if($this->head !== null) {
+      $prev = null;
+      $temp = $this->head;
+      while($temp != null) {
+        $next = $temp->next;
+        $temp->next = $prev;
+        $prev = $temp;
+        $temp = $next;
+      }
+      // print_r($this->head);
+      $this->head = $prev ;
+    }
+  }
+
   public function countList() {
     $count = 0;
     if($this->head !== null) {
@@ -104,19 +119,29 @@ class LinkedList {
   }
 }
 
+
+function test($node) {
+  // $node = new LinkedList();
+  $node->printList();
+  $node->listReverse();
+  $node->printList();
+}
+
 $node = new LinkedList();
 $node->push(10);
 $node->push(20);
 $node->push(30);
-$node->unShift(40);
 $node->unShift(50);
-$node->unShift(60);
+$node->unShift(40);
+// $node->unShift(60);
 // $node->shift();
 // $node->shift();
-$node->pushAfter(100,20);
-$node->pushAfter(50,10);
+// $node->pushAfter(100,20);
+// $node->pushAfter(50,10);
 // $node->popAfter(100);
 // $node->deleteAllNodes();
 // $node->push(150);
-$node->countList();
+// $node->countList();
+// $node->listReverse();
 // $node->printList();
+test($node);
